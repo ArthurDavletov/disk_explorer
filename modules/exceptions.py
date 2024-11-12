@@ -1,0 +1,2 @@
+class DirectoryNotFoundError(OSError):
+    pass
