@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>288</height>
+    <width>436</width>
+    <height>233</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/icons/arrow_back.svg</normaloff>:/icons/icons/arrow_back.svg</iconset>
+             <normaloff>:/icons/arrow_back</normaloff>:/icons/arrow_back</iconset>
            </property>
           </widget>
          </item>
@@ -56,7 +56,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/icons/arrow_forward.svg</normaloff>:/icons/icons/arrow_forward.svg</iconset>
+             <normaloff>:/icons/arrow_forward</normaloff>:/icons/arrow_forward</iconset>
            </property>
           </widget>
          </item>
@@ -67,12 +67,16 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/icons/arrow_upward.svg</normaloff>:/icons/icons/arrow_upward.svg</iconset>
+             <normaloff>:/icons/arrow_upward</normaloff>:/icons/arrow_upward</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="path_edit"/>
+          <widget class="QLineEdit" name="path_edit">
+           <property name="cursor">
+            <cursorShape>IBeamCursor</cursorShape>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="change_color_button">
@@ -81,7 +85,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/icons/light_mode_icon.svg</normaloff>:/icons/icons/light_mode_icon.svg</iconset>
+             <normaloff>:/icons/light_mode_icon</normaloff>:/icons/light_mode_icon</iconset>
            </property>
           </widget>
          </item>
