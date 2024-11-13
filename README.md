@@ -7,6 +7,11 @@
 
 ```commandline
 python -m venv .venv
+```
+
+Включение виртуальной среды:
+
+```commandline
 .\.venv\Scripts\activate
 ```
 
@@ -16,7 +21,8 @@ python -m venv .venv
 pip install PySide6
 ```
 
-## Сборка проекта
+## Сборка проекта (Windows)
+
 Сборка файла ресурсов:
 
 ```commandline
@@ -27,4 +33,16 @@ python .\.venv\Scripts\pyside6-rcc.exe .\resources\resources.qrc -o .\resources\
 
 ```commandline
 python .\.venv\Scripts\pyside6-uic.exe .\ui\main_window.ui -o .\ui\compiled_ui.py --absolute-imports
+```
+
+## Сборка (Linux)
+
+Сборка файла ресурсов:
+
+```commandline
+pyside6-rcc ./resources/resources.qrc -o ./resources/resources_rc.py
+```
+
+```commandline
+pyside6-uic ./ui/main_window.ui -o ./ui/compiled_ui.py --absolute-imports
 ```
