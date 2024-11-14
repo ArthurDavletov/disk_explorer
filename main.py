@@ -1,7 +1,10 @@
-# import PySide6
-import os
+import sys
+from PySide6.QtWidgets import QApplication
+from modules.disk_explorer import DiskExplorer
 
-# print(PySide6.__version__)
 
 if __name__ == '__main__':
-    print(os.path.getmtime("main.py"))
+    app = QApplication(sys.argv)
+    window = DiskExplorer()
+    window.show()
+    sys.exit(app.exec())

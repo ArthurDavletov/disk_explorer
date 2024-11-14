@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>233</height>
+    <width>647</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,20 +61,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="up_button">
+          <widget class="QLineEdit" name="path_edit">
+           <property name="cursor">
+            <cursorShape>IBeamCursor</cursorShape>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="refresh_button">
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/arrow_upward</normaloff>:/icons/arrow_upward</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="path_edit">
-           <property name="cursor">
-            <cursorShape>IBeamCursor</cursorShape>
+             <normaloff>:/icons/refresh</normaloff>:/icons/refresh</iconset>
            </property>
           </widget>
          </item>
@@ -93,7 +93,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableView" name="tableView"/>
+       <widget class="QTableView" name="table_view">
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

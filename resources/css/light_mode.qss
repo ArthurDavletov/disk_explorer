@@ -17,4 +17,5 @@ QLineEdit {
 QTableView {
     font-family: Roboto;
     background-color: #ffffff;
+    color: #000000;
 }

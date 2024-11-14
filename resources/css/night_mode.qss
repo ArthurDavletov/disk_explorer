@@ -11,10 +11,11 @@ QPushButton {
 QLineEdit {
     font-family: Roboto;
     background-color: rgb(74, 74, 74);
-    color: #ffffff
+    color: #ffffff;
 }
 
 QTableView {
     font-family: Roboto;
     background-color: rgb(74, 74, 74);
+    color: #ffffff;
 }
