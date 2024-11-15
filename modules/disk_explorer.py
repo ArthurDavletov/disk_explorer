@@ -1,8 +1,9 @@
-import os.path
-
+import os
 from PySide6.QtWidgets import QApplication, QMainWindow, QHeaderView
 from PySide6.QtGui import QPixmap
-from PySide6.QtCore import QFile, QTextStream, QDir
+from PySide6.QtCore import QFile, QTextStream, Qt
+from pathlib import Path
+
 from modules.dir_model import MyFSModel
 from ui.compiled_ui import Ui_MainWindow
 import sys
@@ -34,11 +35,16 @@ class DiskExplorer(QMainWindow):
 
     def __on_cell_clicked(self, index):
         path = self.model.filePath(index)
-        if os.path.isdir(path):
+        if Path(path).is_dir():
             self.ui.table_view.setRootIndex(self.model.index(path))
+            self.model.setRootPath(path)
         else:
             os.startfile(path)
-        # print(t)
+        self.__update_counts(path)
+
+    def __update_counts(self, path):
+        for child in Path(path).iterdir():
+            self.model.fetch_counts(str(child))
 
     def __on_back_button_clicked(self):
         current_index = self.ui.table_view.rootIndex()
