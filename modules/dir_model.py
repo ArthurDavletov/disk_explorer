@@ -27,7 +27,7 @@ class MyFSModel(QFileSystemModel):
         if path in self.counter_cache or path in self.active_threads:
             return
         worker = CounterWorker(path)
-        worker.countsReady.connect(self.update_counts)
+        worker.counts_ready.connect(self.update_counts)
         worker.finished.connect(lambda: self.active_threads.pop(path, None))
         self.active_threads[path] = worker
         worker.start()
@@ -55,8 +55,23 @@ class MyFSModel(QFileSystemModel):
         return super().headerData(section, orientation, role)
 
 
+def files_dirs_count(path: Path) -> tuple[int | None, int | None]:
+    if not path.is_dir():
+        return None, None
+    files, dirs = 0, 0
+    try:
+        for child in path.iterdir():
+            if child.is_file():
+                files += 1
+            elif child.is_dir():
+                dirs += 1
+    except PermissionError:
+        return None, None
+    return files, dirs
+
+
 class CounterWorker(QThread):
-    countsReady = Signal(Path, dict)  # Сигнал для передачи результатов
+    counts_ready = Signal(Path, dict)  # Сигнал для передачи результатов
 
     def __init__(self, path: Path | str):
         super().__init__()
@@ -65,18 +80,8 @@ class CounterWorker(QThread):
         self.path: Path = path
 
     def run(self):
-        file_count, folder_count = 0, 0
-        if not self.path.is_dir():
-            return
-        try:
-            for child in self.path.iterdir():
-                if child.is_file():
-                    file_count += 1
-                elif child.is_dir():
-                    folder_count += 1
-        except PermissionError:
-            pass
-        self.countsReady.emit(self.path, {"files": file_count, "dirs": folder_count})
+        file_count, folder_count = files_dirs_count(self.path)
+        self.counts_ready.emit(self.path, {"files": file_count, "dirs": folder_count})
 
 if __name__ == '__main__':
     pass
