@@ -1,2 +1,0 @@
-class DirectoryNotFoundError(OSError):
-    pass
