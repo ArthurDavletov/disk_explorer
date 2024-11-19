@@ -19,3 +19,14 @@ QTableView {
     background-color: rgb(74, 74, 74);
     color: #ffffff;
 }
+
+QHeaderView::section {
+    background-color: rgb(74, 74, 74);
+    color: white;
+}
+
+QHeaderView {
+    background-color: rgb(74, 74, 74);
+    color: white;
+    selection-background-color: rgb(51, 51, 51);
+}

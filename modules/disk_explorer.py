@@ -1,7 +1,7 @@
 import os
 from PySide6.QtWidgets import QApplication, QMainWindow, QHeaderView
 from PySide6.QtGui import QPixmap
-from PySide6.QtCore import QFile, QTextStream, Qt
+from PySide6.QtCore import QFile, QTextStream
 from pathlib import Path
 
 from modules.dir_model import MyFSModel

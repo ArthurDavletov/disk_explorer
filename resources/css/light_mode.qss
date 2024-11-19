@@ -1,21 +1,31 @@
 QMainWindow {
     font-family: Roboto;
-    background-color: rgb(240, 240, 240);
+    background-color: None;
 }
 
 QPushButton {
     font-family: Roboto;
-    background-color: rgb(225, 225, 225);
+    background-color: None;
 }
 
 QLineEdit {
     font-family: Roboto;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: None;
+    color: None;
 }
 
 QTableView {
     font-family: Roboto;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: None;
+    color: None;
+}
+
+QHeaderView::section {
+    background-color: None;
+    color: None;
+}
+
+QHeaderView {
+    background-color: None;
+    color: None
 }
