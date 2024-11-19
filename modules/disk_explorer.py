@@ -38,9 +38,9 @@ class DiskExplorer(QMainWindow):
         if Path(path).is_dir():
             self.ui.table_view.setRootIndex(self.model.index(path))
             self.model.setRootPath(path)
+            self.__update_counts(path)
         else:
             os.startfile(path)
-        self.__update_counts(path)
 
     def __update_counts(self, path):
         for child in Path(path).iterdir():
