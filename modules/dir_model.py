@@ -16,14 +16,14 @@ class MyFSModel(QFileSystemModel):
         if role == Qt.DisplayRole:
             n = index.column()
             if n == 4:
-                path = self.filePath(index)
+                path = Path(self.filePath(index))
                 return self.counter_cache.get(path, {}).get("files")
             elif n == 5:
-                path = self.filePath(index)
+                path = Path(self.filePath(index))
                 return self.counter_cache.get(path, {}).get("dirs")
         return super().data(index, role)
 
-    def fetch_counts(self, path):
+    def fetch_counts(self, path: Path):
         if path in self.counter_cache or path in self.active_threads:
             return
         worker = CounterWorker(path)
@@ -32,15 +32,15 @@ class MyFSModel(QFileSystemModel):
         self.active_threads[path] = worker
         worker.start()
 
-    def update_counts(self, path, counts):
+    def update_counts(self, path: Path, counts):
         self.counter_cache[path] = counts
-        index = self.index(path)
+        index = self.index(str(path))
         self.dataChanged.emit(index, index)
 
     def fetchMore(self, parent):
         super().fetchMore(parent)
         if parent.isValid():
-            path = self.filePath(parent)
+            path = Path(self.filePath(parent))
             self.fetch_counts(path)
 
     def headerData(self, section, orientation, role = ...):
@@ -56,21 +56,23 @@ class MyFSModel(QFileSystemModel):
 
 
 class CounterWorker(QThread):
-    countsReady = Signal(str, dict)  # Сигнал для передачи результатов
+    countsReady = Signal(Path, dict)  # Сигнал для передачи результатов
 
-    def __init__(self, path):
+    def __init__(self, path: Path | str):
         super().__init__()
-        self.path = path
+        if isinstance(path, str):
+            path = Path(path)
+        self.path: Path = path
 
     def run(self):
         file_count, folder_count = 0, 0
-        if not Path(self.path).is_dir():
+        if not self.path.is_dir():
             return
         try:
-            for child in Path(self.path).iterdir():
-                if Path(child).is_file():
+            for child in self.path.iterdir():
+                if child.is_file():
                     file_count += 1
-                elif Path(child).is_dir():
+                elif child.is_dir():
                     folder_count += 1
         except PermissionError:
             pass
