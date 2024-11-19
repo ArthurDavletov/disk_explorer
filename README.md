@@ -5,19 +5,19 @@
 
 Создание виртуальной среды:
 
-```commandline
+```powershell
 python -m venv .venv
 ```
 
 Включение виртуальной среды:
 
-```commandline
+```powershell
 .\.venv\Scripts\activate
 ```
 
 Установка библиотек:
 
-```commandline
+```powershell
 pip install PySide6
 ```
 
@@ -25,13 +25,13 @@ pip install PySide6
 
 Сборка файла ресурсов:
 
-```commandline
+```powershell
 python .\.venv\Scripts\pyside6-rcc.exe .\resources\resources.qrc -o .\resources\resources_rc.py
 ```
 
 Сборка файла с дизайном приложения:
 
-```commandline
+```powershell
 python .\.venv\Scripts\pyside6-uic.exe .\ui\main_window.ui -o .\ui\compiled_ui.py --absolute-imports
 ```
 
