@@ -44,7 +44,7 @@ class DiskExplorer(QMainWindow):
 
     def __update_counts(self, path):
         for child in Path(path).iterdir():
-            self.model.fetch_counts(str(child))
+            self.model.fetch_counts(child)
 
     def __on_back_button_clicked(self):
         current_index = self.ui.table_view.rootIndex()

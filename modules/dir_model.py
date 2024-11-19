@@ -1,4 +1,4 @@
-from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtCore import Qt, QThread, Signal, QDir
 from PySide6.QtWidgets import QFileSystemModel
 from pathlib import Path
 
@@ -8,6 +8,8 @@ class MyFSModel(QFileSystemModel):
         super().__init__(parent)
         self.counter_cache = {}
         self.active_threads = {}
+        for drive in QDir.drives():
+            self.fetch_counts(Path(drive.absolutePath()))
 
     def columnCount(self, parent = ...):
         return super().columnCount(parent) + 2
@@ -73,10 +75,8 @@ def files_dirs_count(path: Path) -> tuple[int | None, int | None]:
 class CounterWorker(QThread):
     counts_ready = Signal(Path, dict)  # Сигнал для передачи результатов
 
-    def __init__(self, path: Path | str):
+    def __init__(self, path: Path):
         super().__init__()
-        if isinstance(path, str):
-            path = Path(path)
         self.path: Path = path
 
     def run(self):
