@@ -63,22 +63,18 @@ class DiskExplorer(QMainWindow):
             self.ui.table_view.setRootIndex(parent_index)
             path_str = self.model.filePath(parent_index)
             self.model.setRootPath(path_str)
-            self.path_history = Path(path_str)
         else:
             self.model.setRootPath("")
             self.ui.table_view.setRootIndex(self.model.index(self.model.rootPath()))
             self.ui.path_edit.clear()
-            self.path_history = None
         self.__update_path_line()
 
     def __on_forward_button_clicked(self):
         base = Path(self.model.rootPath())
         target = self.path_history
-        if not target.resolve().is_relative_to(base.resolve()):
+        if not target.is_relative_to(base) or base == target:
             return
-        print(base, target)
-        base /= target.relative_to(base).parts
-
+        base /= target.relative_to(base).parts[0]
         self.ui.table_view.setRootIndex(self.model.index(str(base)))
         path_str = self.model.filePath(self.model.index(str(base)))
         self.model.setRootPath(path_str)
@@ -89,7 +85,7 @@ class DiskExplorer(QMainWindow):
         icons = {
             self.ui.back_button: [":/icons/arrow_back", ":/icons/arrow_back_white"],
             self.ui.forward_button: [":/icons/arrow_forward", ":/icons/arrow_forward_white"],
-            self.ui.refresh_button: [":/icons/refresh", ":/icons/refresh_white"],
+            # self.ui.refresh_button: [":/icons/refresh", ":/icons/refresh_white"],
             self.ui.change_color_button: [":/icons/light_mode_icon", ":/icons/dark_mode_icon"]
         }
         self.night_mode = not self.night_mode

@@ -68,17 +68,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="refresh_button">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/refresh</normaloff>:/icons/refresh</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="change_color_button">
            <property name="text">
             <string/>

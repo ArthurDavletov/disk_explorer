@@ -1,7 +1,5 @@
 <RCC>
   <qresource prefix="icons">
-    <file alias="refresh">icons/refresh_black.svg</file>
-    <file alias="refresh_white">icons/refresh_white.svg</file>
     <file alias="arrow_back_white">icons/arrow_back_white.svg</file>
     <file alias="arrow_forward_white">icons/arrow_forward_white.svg</file>
     <file alias="arrow_back">icons/arrow_back.svg</file>
