@@ -18,7 +18,7 @@ python -m venv .venv
 Установка библиотек:
 
 ```powershell
-pip install PySide6
+pip install -r requirements.txt
 ```
 
 ## Сборка проекта (Windows)
@@ -46,3 +46,23 @@ pyside6-rcc ./resources/resources.qrc -o ./resources/resources_rc.py
 ```commandline
 pyside6-uic ./ui/main_window.ui -o ./ui/compiled_ui.py --absolute-imports
 ```
+
+## Сборка в бинарник
+
+Для сборки дополнительно понадобится `pyinstaller`
+
+```commandline
+pip install pyinstaller
+```
+
+Windows:
+```commandline
+pyinstaller.exe -F main.py --noconsole
+```
+
+Linux:
+```commandline
+pyinstaller -F main.py --noconsole
+```
+
+Запускаемый файл будет находиться в `./dist/`
