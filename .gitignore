@@ -166,3 +166,7 @@ cython_debug/
 
 # test_file
 __test.py
+
+# qt_build_files
+ui/compiled_ui.py
+resources/resources_rc.py
