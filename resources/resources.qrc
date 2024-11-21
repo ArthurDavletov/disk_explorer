@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="icons">
+    <file alias="arrow_back_white">icons/arrow_back_white.svg</file>
+    <file alias="arrow_forward_white">icons/arrow_forward_white.svg</file>
+    <file alias="arrow_back">icons/arrow_back.svg</file>
+    <file alias="arrow_forward">icons/arrow_forward.svg</file>
+    <file alias="dark_mode_icon">icons/dark_mode_icon.svg</file>
+    <file alias="light_mode_icon">icons/light_mode_icon.svg</file>
+  </qresource>
+  <qresource prefix="qss">
+    <file alias="light_mode_qss">css/light_mode.qss</file>
+    <file alias="night_mode_qss">css/night_mode.qss</file>
+  </qresource>
+</RCC>
