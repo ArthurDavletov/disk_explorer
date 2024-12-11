@@ -2,16 +2,21 @@ from PySide6.QtCore import Qt, QThread, Signal, QDir
 from PySide6.QtWidgets import QFileSystemModel
 from pathlib import Path
 
+from modules.logger import Logger
+
 
 class MyFSModel(QFileSystemModel):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, level: int | str = 40):
         super().__init__(parent)
+        self.__logger = Logger(__name__, level)
         self.counter_cache = {}
         self.active_threads = {}
         for drive in QDir.drives():
             self.fetch_counts(Path(drive.absolutePath()))
 
     def columnCount(self, parent = ...):
+        """Функция переопределяет количество столбцов.
+        По умолчанию QFileSystemModel не предоставляет информацию о файлах и директориях"""
         return super().columnCount(parent) + 2
 
     def data(self, index, role = Qt.DisplayRole):
@@ -26,7 +31,9 @@ class MyFSModel(QFileSystemModel):
         return super().data(index, role)
 
     def fetch_counts(self, path: Path):
+        """Функция для запуска подсчёта количества папок и файлов"""
         if path in self.counter_cache or path in self.active_threads:
+            self.__logger.info(f"Данные о папке {path} уже имеются.")
             return
         worker = CounterWorker(path)
         worker.counts_ready.connect(self.update_counts)
@@ -35,9 +42,11 @@ class MyFSModel(QFileSystemModel):
         worker.start()
 
     def update_counts(self, path: Path, counts):
+        """Функция для обновления о количестве."""
         self.counter_cache[path] = counts
         index = self.index(str(path))
         self.dataChanged.emit(index, index)
+        self.__logger.info(f"Информация о {path} обновлена.")
 
     def fetchMore(self, parent):
         super().fetchMore(parent)
@@ -58,6 +67,10 @@ class MyFSModel(QFileSystemModel):
 
 
 def files_dirs_count(path: Path) -> tuple[int | None, int | None]:
+    """Функция подсчёта файлов и директорий
+
+    :param path: pathlib.Path-объект, представляющий директорию
+    :return: возвращает кортеж из двух элементов: количеств файлов и папок внутри указанной директории."""
     if not path.is_dir():
         return None, None
     files, dirs = 0, 0
@@ -73,6 +86,7 @@ def files_dirs_count(path: Path) -> tuple[int | None, int | None]:
 
 
 class CounterWorker(QThread):
+    """Класс для параллельного подсчёта файлов и папок"""
     counts_ready = Signal(Path, dict)  # Сигнал для передачи результатов
 
     def __init__(self, path: Path):
