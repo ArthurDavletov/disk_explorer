@@ -8,7 +8,7 @@
     <file alias="light_mode_icon">icons/light_mode_icon.svg</file>
   </qresource>
   <qresource prefix="qss">
-    <file alias="light_mode_qss">css/light_mode.qss</file>
-    <file alias="night_mode_qss">css/night_mode.qss</file>
+    <file alias="light_mode_qss">qss/light_mode.qss</file>
+    <file alias="night_mode_qss">qss/night_mode.qss</file>
   </qresource>
 </RCC>
