@@ -1,3 +1,4 @@
+"""Главный файл, запускающий оконное приложение"""
 import sys
 from PySide6.QtWidgets import QApplication
 from modules.disk_explorer import DiskExplorer

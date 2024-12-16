@@ -1,3 +1,4 @@
+"""Файл с логгером"""
 import logging
 import logging.handlers
 import os

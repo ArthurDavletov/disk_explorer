@@ -1,3 +1,4 @@
+"""Файл для запуска GUI"""
 import os
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QHeaderView
@@ -11,6 +12,7 @@ from modules.logger import Logger
 
 
 class DiskExplorer(QMainWindow):
+    """Класс оконного приложения"""
     def __init__(self, level: int | str = 40, *args):
         """Экземпляр окна для приложения.
 

@@ -1,3 +1,4 @@
+"""Файл с модифицированным классом файловой системы для Qt"""
 from PySide6.QtCore import Qt, QThread, Signal, QDir
 from PySide6.QtWidgets import QFileSystemModel
 from pathlib import Path
