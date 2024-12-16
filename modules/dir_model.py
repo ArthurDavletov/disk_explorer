@@ -6,7 +6,9 @@ from modules.logger import Logger
 
 
 class MyFSModel(QFileSystemModel):
+    """Класс модели файловой системы."""
     def __init__(self, parent=None, level: int | str = 40):
+        """Инициализатор объекта класса MyFSModel"""
         super().__init__(parent)
         self.__logger = Logger(__name__, level)
         self.counter_cache = {}
@@ -20,6 +22,7 @@ class MyFSModel(QFileSystemModel):
         return super().columnCount(parent) + 2
 
     def data(self, index, role = Qt.DisplayRole):
+        """Функция для получения информации в ячейке по определённому индексу."""
         if role == Qt.DisplayRole:
             n = index.column()
             if n == 4:
@@ -49,12 +52,14 @@ class MyFSModel(QFileSystemModel):
         self.__logger.info(f"Информация о {path} обновлена.")
 
     def fetchMore(self, parent):
+        """Функция дл обновления информации."""
         super().fetchMore(parent)
         if parent.isValid():
             path = Path(self.filePath(parent))
             self.fetch_counts(path)
 
     def headerData(self, section, orientation, role = ...):
+        """Получения информации о заголовке таблицы"""
         if orientation == Qt.Horizontal and role == Qt.DisplayRole:
             match section:
                 case 0: return "Имя"
